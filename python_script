@@ -1,0 +1,24 @@
+import os
+from PIL import Image
+
+# The directory containing the original images
+original_dir = "./compressed_images/"
+
+# The directory to save the resized images
+resized_dir = "./resized_images"
+
+# Make sure the resized_dir exists
+if not os.path.exists(resized_dir):
+    os.makedirs(resized_dir)
+
+# Iterate over all files in the original_dir
+for filename in os.listdir(original_dir):
+    # Check if the file is an image
+    if filename.endswith(".jpg") or filename.endswith(".png"):
+        # Open the image
+        with Image.open(os.path.join(original_dir, filename)) as im:
+            # Resize the image
+            im_resized = im.resize((3334, 2500))
+
+            # Save the resized image
+            im_resized.save(os.path.join(resized_dir, filename))
